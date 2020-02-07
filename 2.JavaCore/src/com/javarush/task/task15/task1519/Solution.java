@@ -14,11 +14,17 @@ public class Solution {
         String input = bufferedReader.readLine();
         while (!input.equals("exit")) {
             if (input.contains(".")) {
-                print(Double.valueOf(input));
+                try {
+                    print(Double.valueOf(input));
+                } catch (NumberFormatException e) {
+                    print(input);
+                }
             } else {
+//                input=input.replaceAll("\\s","");
+                String input1 = input.trim();
                 try {
 
-                    int i = Integer.parseInt(input);
+                    int i = Integer.parseInt(input1);
                     if (i > 0 && i < 128) {
                         print((short) i);
                     }

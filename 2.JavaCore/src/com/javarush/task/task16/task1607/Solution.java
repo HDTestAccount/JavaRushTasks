@@ -17,13 +17,19 @@ public class Solution {
 
     public static int calculateHorsesFinished(List<Horse> horses) throws InterruptedException {
         int finishedCount = 0;
-        for (int i = 0; i < horses.size(); i++) {
-            if (horses.get(i).isFinished) {
+        for (int i=0;i<horses.size();i++){
+            if (horses.get(i).isFinished()) {
                 finishedCount++;
-            }else {
+            } else {
                 System.out.println("Waiting for " + horses.get(i).getName());
+                horses.get(i).join();
             }
         }
+//        for (int i=0;i<horses.size();i++) {
+//            if (!horses.get(i).isFinished) {
+//                horses.get(i).join();
+//            }
+//        }
         return finishedCount;
     }
 

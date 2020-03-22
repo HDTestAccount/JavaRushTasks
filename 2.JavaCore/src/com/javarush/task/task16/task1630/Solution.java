@@ -13,8 +13,6 @@ public class Solution {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        firstFileName = "/home/test/Downloads/file1.txt";
-        secondFileName = "/home/test/Downloads/file2.txt";
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -41,13 +39,13 @@ public class Solution {
         void start();
     }
 
-    public static class ReadFileThread implements ReadFileInterface, Runnable {
-        String fileName;
-        String fileContent = new String();
+    public static class ReadFileThread extends Thread implements ReadFileInterface {
+        String fName;
+        String fileContent="";
 
         @Override
         public void setFileName(String fullFileName) {
-            this.fileName = fullFileName;
+            fName = fullFileName;
         }
 
         @Override
@@ -56,28 +54,18 @@ public class Solution {
         }
 
         @Override
-        public void join() throws InterruptedException {
-
-        }
-
-        @Override
-        public void start() {
-            run();
-        }
-
-        @Override
         public void run() {
-            StringBuilder fileContentBuffer = new StringBuilder();
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
-                while (bufferedReader.ready()) {
-                    fileContentBuffer.append(bufferedReader.readLine() + "\n");
+            try (BufferedReader fReader = new BufferedReader(new InputStreamReader(new FileInputStream(fName)))) {
+                while (fReader.ready()) {
+                    fileContent += fReader.readLine();
+                    fileContent += " ";
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            fileContent = fileContentBuffer.toString();
+            fileContent = fileContent.substring(0, fileContent.length() - 1);
         }
     }
 }

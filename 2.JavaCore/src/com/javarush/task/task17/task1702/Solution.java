@@ -34,10 +34,10 @@ public class Solution {
     }
 
     public static void initThreads() throws InterruptedException {
-//        List<Thread> threads = new ArrayList<Thread>(threadCount);
-//        for (int i = 0; i < threadCount; i++) threads.add(new SortThread());
-//        for (Thread thread : threads) thread.start();
-//        for (Thread thread : threads) thread.join();
+        List<Thread> threads = new ArrayList<Thread>(threadCount);
+        for (int i = 0; i < threadCount; i++) threads.add(new SortThread());
+        for (Thread thread : threads) thread.start();
+        for (Thread thread : threads) thread.join();
     }
 
     public static void sort(int[] array) {
@@ -48,6 +48,15 @@ public class Solution {
                     array[i] = array[j];
                     array[j] = k;
                 }
+            }
+        }
+    }
+
+    public static class SortThread extends Thread {
+        @Override
+        public void run() {
+            synchronized (SortThread.class) {
+                sort(testArray);
             }
         }
     }

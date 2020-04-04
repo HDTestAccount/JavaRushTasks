@@ -8,9 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="javafx-sdk-11.0.2">
+      <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2" />
+          <root url="jar://$MODULE_DIR$/lib/desktop-game-engine.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

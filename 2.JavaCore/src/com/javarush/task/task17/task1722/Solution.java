@@ -4,6 +4,9 @@ package com.javarush.task.task17.task1722;
 Посчитаем
 */
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class Solution {
     public static void main(String[] args) throws InterruptedException {
         Counter counter1 = new Counter();
@@ -16,9 +19,15 @@ public class Solution {
         counter3.start();
         counter4.start();
 
+        counter1.join();
+        counter2.join();
+        counter3.join();
+        counter4.join();
+
         for (int i = 1; i <= 100; i++) {
             if (values[i] != 1) {
                 System.out.println("Массив values содержит элементы неравные 1");
+                System.out.println(Arrays.toString(values));
                 break;
             }
         }
@@ -45,16 +54,17 @@ public class Solution {
         @Override
         public void run() {
             do {
-                synchronized (this) {
-                    incrementCount();
+                synchronized (Solution.class) {
+
                     values[getCount()]++;
+                    incrementCount();
                 }
 
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
                 }
-            } while (getCount() < 100);
+            } while (getCount() < 104);
         }
     }
 }

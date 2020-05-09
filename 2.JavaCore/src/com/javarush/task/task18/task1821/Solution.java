@@ -5,33 +5,23 @@ package com.javarush.task.task18.task1821;
 */
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
+        Map<Character, Integer> charMap = new TreeMap<>();
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String fName1 = br.readLine();
-        String fName2 = br.readLine();
-        BufferedReader fr = new BufferedReader(new InputStreamReader(new FileInputStream(fName1)));
-        BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fName2)));
-        int key;
-        Long counter = 1L;
-        Map<Integer, Long> map = new TreeMap<>();
-        while (fr.ready()) {
-            key = fr.read();
-            map.computeIfPresent(key, (k, v) -> v += 1);
-            map.computeIfAbsent(key, k -> 1L);
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(args[0])));
+
+        while (br.ready()) {
+            int line = br.read();
+            charMap.computeIfPresent((char) line, (k, v) -> v + 1);
+            charMap.computeIfAbsent((char) line, (k) -> 1);
         }
-
-
-        while (true) {
-
+        br.close();
+        for (Map.Entry<Character, Integer> entr : charMap.entrySet()) {
+//            System.out.println((byte) entr.getKey().charValue() + " " + entr.getKey() + " " + entr.getValue());
+            System.out.println(entr.getKey() + " " + entr.getValue());
         }
-
-
     }
 }
